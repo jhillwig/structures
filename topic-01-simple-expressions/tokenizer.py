@@ -36,11 +36,14 @@ def tokenize(characters):
                 current_tag = tag
                 break
         assert match is not None
+        ## the value is the group of characters that match it
         value = match.group(0)
 
+        ## If error, state what that error is
         if current_tag == "error":
             raise Exception(f"Unexpected character: {value!r}")
 
+        ## If not whitespace, make a token
         if current_tag != "whitespace":
             token = {"tag": current_tag, "line": line, "column": column}
             if current_tag == "number":
@@ -48,6 +51,7 @@ def tokenize(characters):
                     token["value"] = float(value)
                 else:
                     token["value"] = int(value)
+            ## Pin token to token list
             tokens.append(token)
 
         # advance position and update line/column
@@ -57,8 +61,9 @@ def tokenize(characters):
                 column = 1
             else:
                 column += 1
+        ## New position is where the current group ends
         position = match.end()
-
+    ## Append the token to None and respond appropriately
     tokens.append({"tag": None, "line": line, "column": column})
     return tokens
 
