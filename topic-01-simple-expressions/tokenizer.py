@@ -1,6 +1,10 @@
 import re
 from pprint import pprint
 
+## \d+ is any digit 0-9
+## for decimals like 1.2
+## \d+*\.\d+ 
+## *\. Seperates checking both sides fo the decimal
 patterns = [
     (r"\s+", "whitespace"),
     (r"\d*\.\d+|\d+\.\d*|\d+", "number"),
@@ -13,6 +17,7 @@ patterns = [
     (r".", "error"),
 ]
 
+## (p, tag) = for each pattern in text
 patterns = [(re.compile(p), tag) for p, tag in patterns]
 
 
