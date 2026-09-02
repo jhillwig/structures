@@ -17,7 +17,7 @@ patterns = [
     (r".", "error"),
 ]
 
-## (p, tag) = for each pattern in text
+## (p, tag) = for each text that matches a pattern
 patterns = [(re.compile(p), tag) for p, tag in patterns]
 
 
